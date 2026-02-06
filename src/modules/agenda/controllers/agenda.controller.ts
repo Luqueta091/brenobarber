@@ -44,11 +44,23 @@ export async function atualizarHorario(req: Request, res: Response) {
   ) {
     throw validationError("hora_inicio deve ser menor que hora_fim");
   }
-  const data = {
-    ...payload,
-    ...(payload.horaInicio ? { horaInicio: timeToDate(payload.horaInicio) } : {}),
-    ...(payload.horaFim ? { horaFim: timeToDate(payload.horaFim) } : {})
+  const data: Partial<{
+    diaSemana: number;
+    horaInicio: Date;
+    horaFim: Date;
+    ativo: boolean;
+  }> = {
+    diaSemana: payload.diaSemana,
+    ativo: payload.ativo
   };
+
+  if (payload.horaInicio) {
+    data.horaInicio = timeToDate(payload.horaInicio);
+  }
+
+  if (payload.horaFim) {
+    data.horaFim = timeToDate(payload.horaFim);
+  }
   const horario = await agendaRepository.atualizarHorario(req.params.id, data);
   res.json({ data: horario });
 }
