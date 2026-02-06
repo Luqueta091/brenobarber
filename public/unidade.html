@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agendar - Unidade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <span class="badge" id="unitSlug">carregando...</span>
+      <h1 id="unitName">Agendamento</h1>
+      <p>Escolha serviço, data e horário disponível.</p>
+    </header>
+
+    <main>
+      <section class="grid two">
+        <div class="card fade-in">
+          <h2>Escolha</h2>
+          <label for="servico">Serviço</label>
+          <select id="servico"></select>
+
+          <label for="data">Data</label>
+          <input type="date" id="data" />
+
+          <div id="slots" class="slot-grid"></div>
+          <div id="slotsEmpty" class="notice" style="display: none">
+            Sem horários disponíveis para esta data.
+          </div>
+        </div>
+
+        <div class="card fade-in">
+          <h2>Confirmar</h2>
+          <div id="resumo" class="notice" style="display: none"></div>
+
+          <label for="nome">Nome</label>
+          <input id="nome" placeholder="Seu nome" />
+
+          <label for="telefone">Telefone</label>
+          <input id="telefone" placeholder="(xx) xxxxx-xxxx" />
+
+          <button id="confirmar">Confirmar agendamento</button>
+          <button id="verMeus" class="secondary">Ver meus agendamentos</button>
+          <p><small class="muted" id="mensagem"></small></p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a href="/">Voltar para início</a>
+    </footer>
+
+    <script src="/js/public.js" type="module"></script>
+  </body>
+</html>

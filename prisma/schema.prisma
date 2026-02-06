@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AgendamentoStatus {
+  Confirmado
+  CanceladoCliente
+  CanceladoBarbeiro
+  EmAtendimento
+  Concluido
+  Falta
+
+  @@map("agendamento_status")
+}
+
+model Unidade {
+  id          String            @id @default(uuid()) @db.Uuid
+  slug        String            @unique
+  nome        String
+  criadoEm    DateTime          @default(now()) @map("criado_em") @db.Timestamptz(6)
+  horarios    HorarioTrabalho[]
+  agendamentos Agendamento[]
+  bloqueios   BloqueioAgenda[]
+
+  @@map("unidade")
+}
+
+model Servico {
+  id             String         @id @default(uuid()) @db.Uuid
+  nome           String
+  duracaoMinutos Int            @map("duracao_minutos")
+  preco          Decimal        @db.Decimal(10, 2)
+  ativo          Boolean        @default(true)
+  criadoEm       DateTime       @default(now()) @map("criado_em") @db.Timestamptz(6)
+  agendamentos   Agendamento[]
+
+  @@index([ativo])
+  @@map("servico")
+}
+
+model HorarioTrabalho {
+  id         String   @id @default(uuid()) @db.Uuid
+  unidadeId  String   @map("unidade_id") @db.Uuid
+  diaSemana  Int      @map("dia_semana")
+  horaInicio DateTime @map("hora_inicio") @db.Time(6)
+  horaFim    DateTime @map("hora_fim") @db.Time(6)
+  ativo      Boolean  @default(true)
+  criadoEm   DateTime @default(now()) @map("criado_em") @db.Timestamptz(6)
+
+  unidade Unidade @relation(fields: [unidadeId], references: [id])
+
+  @@index([unidadeId, diaSemana])
+  @@map("horario_trabalho")
+}
+
+model BloqueioAgenda {
+  id        String   @id @default(uuid()) @db.Uuid
+  inicioEm  DateTime @map("inicio_em") @db.Timestamptz(6)
+  fimEm     DateTime @map("fim_em") @db.Timestamptz(6)
+  motivo    String?
+  unidadeId String?  @map("unidade_id") @db.Uuid
+  criadoEm  DateTime @default(now()) @map("criado_em") @db.Timestamptz(6)
+
+  unidade Unidade? @relation(fields: [unidadeId], references: [id])
+
+  @@index([inicioEm])
+  @@index([fimEm])
+  @@index([unidadeId])
+  @@map("bloqueio_agenda")
+}
+
+model Cliente {
+  id                  String        @id @default(uuid()) @db.Uuid
+  nome                String
+  telefoneNormalizado String        @unique @map("telefone_normalizado")
+  criadoEm            DateTime      @default(now()) @map("criado_em") @db.Timestamptz(6)
+  agendamentos        Agendamento[]
+
+  @@index([telefoneNormalizado])
+  @@map("cliente")
+}
+
+model Agendamento {
+  id          String            @id @default(uuid()) @db.Uuid
+  unidadeId   String            @map("unidade_id") @db.Uuid
+  servicoId   String            @map("servico_id") @db.Uuid
+  clienteId   String            @map("cliente_id") @db.Uuid
+  inicioEm    DateTime          @map("inicio_em") @db.Timestamptz(6)
+  fimEm       DateTime          @map("fim_em") @db.Timestamptz(6)
+  status      AgendamentoStatus @default(Confirmado)
+  criadoEm    DateTime          @default(now()) @map("criado_em") @db.Timestamptz(6)
+  atualizadoEm DateTime         @updatedAt @map("atualizado_em") @db.Timestamptz(6)
+
+  unidade Unidade @relation(fields: [unidadeId], references: [id])
+  servico Servico @relation(fields: [servicoId], references: [id])
+  cliente Cliente @relation(fields: [clienteId], references: [id])
+
+  @@index([inicioEm])
+  @@index([status])
+  @@index([unidadeId, inicioEm])
+  @@index([clienteId, inicioEm])
+  @@map("agendamento")
+}

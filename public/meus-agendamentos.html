@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meus agendamentos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Meus agendamentos</h1>
+      <p>Use o mesmo telefone cadastrado para ver os horários ativos.</p>
+    </header>
+
+    <main>
+      <section class="card fade-in">
+        <h2>Buscar</h2>
+        <div id="buscaForm">
+          <label for="telefone">Telefone</label>
+          <input id="telefone" placeholder="(xx) xxxxx-xxxx" />
+          <button id="buscar">Buscar</button>
+        </div>
+        <div id="lista" class="list" style="margin-top: 16px"></div>
+        <p><small class="muted" id="mensagem"></small></p>
+      </section>
+    </main>
+
+    <footer>
+      <a href="/">Voltar para início</a>
+    </footer>
+
+    <script src="/js/meus-agendamentos.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin - Agenda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Admin do Barbeiro</h1>
+      <p>Gestão rápida de serviços, horários e agenda.</p>
+    </header>
+
+    <main>
+      <section class="card fade-in">
+        <h2>Autenticação</h2>
+        <label for="adminToken">Token</label>
+        <input id="adminToken" placeholder="x-admin-token" />
+        <button id="salvarToken">Salvar token</button>
+        <p><small class="muted" id="authMsg"></small></p>
+      </section>
+
+      <section class="grid two" style="margin-top: 20px">
+        <div class="card fade-in">
+          <h2>Serviços</h2>
+          <div class="list" id="servicosLista"></div>
+          <label for="novoServicoNome">Novo serviço</label>
+          <input id="novoServicoNome" placeholder="Nome" />
+          <div class="inline">
+            <input id="novoServicoDuracao" placeholder="Duração (min)" type="number" />
+            <input id="novoServicoPreco" placeholder="Preço" type="number" step="0.01" />
+          </div>
+          <button id="criarServico">Adicionar</button>
+        </div>
+
+        <div class="card fade-in">
+          <h2>Horários</h2>
+          <label for="horarioUnidade">Unidade</label>
+          <select id="horarioUnidade"></select>
+          <div class="inline">
+            <input id="horarioDia" placeholder="Dia (0-6)" type="number" min="0" max="6" />
+            <input id="horarioInicio" placeholder="Inicio (HH:MM)" />
+            <input id="horarioFim" placeholder="Fim (HH:MM)" />
+          </div>
+          <button id="criarHorario">Adicionar horário</button>
+          <div class="list" id="horariosLista" style="margin-top: 12px"></div>
+        </div>
+      </section>
+
+      <section class="grid two" style="margin-top: 20px">
+        <div class="card fade-in">
+          <h2>Bloqueios</h2>
+          <label for="bloqueioUnidade">Unidade (opcional)</label>
+          <select id="bloqueioUnidade">
+            <option value="">Global</option>
+          </select>
+          <label for="bloqueioInicio">Inicio</label>
+          <input id="bloqueioInicio" type="datetime-local" />
+          <label for="bloqueioFim">Fim</label>
+          <input id="bloqueioFim" type="datetime-local" />
+          <label for="bloqueioMotivo">Motivo</label>
+          <input id="bloqueioMotivo" placeholder="Motivo" />
+          <button id="criarBloqueio">Criar bloqueio</button>
+          <div class="list" id="bloqueiosLista" style="margin-top: 12px"></div>
+        </div>
+
+        <div class="card fade-in">
+          <h2>Agenda (dia)</h2>
+          <label for="agendaUnidade">Unidade</label>
+          <select id="agendaUnidade"></select>
+          <label for="agendaData">Data</label>
+          <input id="agendaData" type="date" />
+          <button id="carregarAgenda">Carregar agenda</button>
+          <div class="list" id="agendaLista" style="margin-top: 12px"></div>
+        </div>
+      </section>
+
+      <section class="card fade-in" style="margin-top: 20px">
+        <h2>Agenda (semana)</h2>
+        <label for="agendaSemanaUnidade">Unidade</label>
+        <select id="agendaSemanaUnidade"></select>
+        <label for="agendaSemanaInicio">Data inicio</label>
+        <input id="agendaSemanaInicio" type="date" />
+        <button id="carregarAgendaSemana">Carregar semana</button>
+        <div class="list" id="agendaSemanaLista" style="margin-top: 12px"></div>
+      </section>
+    </main>
+
+    <footer>
+      <a href="/">Voltar para início</a>
+    </footer>
+
+    <script src="/js/admin.js" type="module"></script>
+  </body>
+</html>

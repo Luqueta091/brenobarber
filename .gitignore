@@ -1,0 +1,10 @@
+.DS_Store
+.env
+node_modules/
+dist/
+coverage/
+.cache/
+*.log
+*.tsbuildinfo
+frontend/node_modules/
+frontend/dist/
