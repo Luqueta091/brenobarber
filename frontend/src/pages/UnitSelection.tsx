@@ -1,6 +1,5 @@
 import { useUnits } from "@/hooks/use-units";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
 import { MapPin } from "lucide-react";

@@ -7,9 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { CalendarDays, Clock, MapPin, AlertCircle, Phone } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import { Separator } from "@/components/ui/separator";
+import { CalendarDays, Clock, MapPin, Phone } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function MyAppointments() {
     const navigate = useNavigate();

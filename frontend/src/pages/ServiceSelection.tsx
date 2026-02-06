@@ -1,5 +1,5 @@
 import { useServices } from "@/hooks/use-services";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useParams, useNavigate } from "react-router-dom";
